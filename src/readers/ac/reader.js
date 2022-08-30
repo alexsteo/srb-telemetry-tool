@@ -17,3 +17,8 @@ const readAllAccFiltered = () => {
         static: readStaticAccFiltered()
     }
 }
+
+module.exports = {
+    readAll,
+    readAllAccFiltered
+}

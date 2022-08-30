@@ -1,17 +1,17 @@
-const readArray = (reader, count) => {
+const readArray = (reader, type, count) => {
     let result = [];
     for (let i = 0; i < count; i++) {
-        result.push(reader);
+        type === 'int' ? result.push(reader.ReadUInt32()) : result.push(reader.ReadFloat());
     }
     return result;
 }
 
-const readMatrix = (reader, x, y) => {
+const readMatrix = (reader, type, x, y) => {
     let result = [];
     for (let i = 0; i < x; i++) {
         let inner = [];
-        for (let i = 0; i < y; i++) {
-            inner.push(reader);
+        for (let j = 0; j < y; j++) {
+            type === 'int' ? inner.push(reader.ReadUInt32()) : inner.push(reader.ReadFloat());
         }
         result.push(inner);
     }

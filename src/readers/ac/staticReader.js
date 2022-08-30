@@ -15,8 +15,6 @@ const readStatic = () => {
     let data = {};
     const reader = new binutils.BinaryReader(m_static_buffer, 'little');
 
-    data.packetId = reader.ReadUInt32();
-
     data.smVersion = readUtils.readWideString(reader, 15);
     data.acVersion = readUtils.readWideString(reader, 15);
 
@@ -35,8 +33,8 @@ const readStatic = () => {
     data.maxPower = reader.ReadFloat();
     data.maxRpm = reader.ReadUInt32();
     data.maxFuel = reader.ReadFloat();
-    data.suspensionMaxTravel = readUtils.readArray(reader.ReadFloat(), 4);
-    data.tyreRadius = readUtils.readArray(reader.ReadFloat(), 4);
+    data.suspensionMaxTravel = readUtils.readArray(reader, 'float', 4);
+    data.tyreRadius = readUtils.readArray(reader, 'float', 4);
     data.maxTurboBoost = reader.ReadFloat();
     data.deprecated_1 = reader.ReadFloat();
     data.deprecated_2 = reader.ReadFloat();
@@ -93,8 +91,6 @@ const readStaticAccFiltered = () => {
     let data = {};
     const reader = new binutils.BinaryReader(m_static_buffer, 'little');
 
-    data.packetId = reader.ReadUInt32();
-
     data.smVersion = readUtils.readWideString(reader, 15);
     data.acVersion = readUtils.readWideString(reader, 15);
 
@@ -113,8 +109,8 @@ const readStaticAccFiltered = () => {
     reader.ReadFloat();
     data.maxRpm = reader.ReadUInt32();
     data.maxFuel = reader.ReadFloat();
-    readUtils.readArray(reader.ReadFloat(), 4);
-    readUtils.readArray(reader.ReadFloat(), 4);
+    readUtils.readArray(reader, 'float', 4);
+    readUtils.readArray(reader, 'float', 4);
     reader.ReadFloat();
     reader.ReadFloat();
     reader.ReadFloat();

@@ -39,15 +39,17 @@ const readGraphics = () => {
     data.lastSectorTime = reader.ReadUInt32();
     data.numberOfLaps = reader.ReadUInt32();
 
-    data.tyreCompund = readUtils.readWideString(reader, 33);
+    data.tyreCompund = readUtils.readWideString(reader, 34);
 
-    data.replayTimeMultiplier = reader.ReadFloat();//
+    data.replayTimeMultiplier = reader.ReadFloat();
 
     data.normalizedCarPosition = reader.ReadFloat();
 
     data.activeCars = reader.ReadUInt32();
-    data.carCoordinates = readUtils.readMatrix(reader.ReadFloat(), 60, 3);
-    data.carID = readUtils.readArray(reader.ReadUInt32(), 60);
+
+    data.carCoordinates = readUtils.readMatrix(reader, 'float', 60, 3);
+
+    data.carID = readUtils.readArray(reader, 'int', 60);
     data.playerCarID = reader.ReadUInt32();
 
     data.penaltyTime = reader.ReadFloat();
@@ -175,15 +177,15 @@ const readGraphicsAccFiltered = () => {
     data.lastSectorTime = reader.ReadUInt32();
     data.numberOfLaps = reader.ReadUInt32();
 
-    data.tyreCompund = readUtils.readWideString(reader, 33);
+    data.tyreCompund = readUtils.readWideString(reader, 34);
 
     reader.ReadFloat();
 
     data.normalizedCarPosition = reader.ReadFloat();
 
     data.activeCars = reader.ReadUInt32();
-    data.carCoordinates = readUtils.readMatrix(reader.ReadFloat(), 60, 3);
-    data.carID = readUtils.readArray(reader.ReadUInt32(), 60);
+    data.carCoordinates = readUtils.readMatrix(reader, 'float', 60, 3);
+    data.carID = readUtils.readArray(reader, 'int', 60);
     data.playerCarID = reader.ReadUInt32();
 
     data.penaltyTime = reader.ReadFloat();
