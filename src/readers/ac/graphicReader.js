@@ -49,8 +49,8 @@ const readGraphics = () => {
 
     data.carCoordinates = readUtils.readMatrix(reader, 'float', 60, 3);
 
-    data.carID = readUtils.readArray(reader, 'int', 60);
-    data.playerCarID = reader.ReadUInt32();
+    data.carId = readUtils.readArray(reader, 'int', 60);
+    data.playerCarId = reader.ReadUInt32();
 
     data.penaltyTime = reader.ReadFloat();
 
@@ -185,8 +185,8 @@ const readGraphicsAccFiltered = () => {
 
     data.activeCars = reader.ReadUInt32();
     data.carCoordinates = readUtils.readMatrix(reader, 'float', 60, 3);
-    data.carID = readUtils.readArray(reader, 'int', 60);
-    data.playerCarID = reader.ReadUInt32();
+    data.carId = readUtils.readArray(reader, 'int', 60);
+    data.playerCarId = reader.ReadUInt32();
 
     data.penaltyTime = reader.ReadFloat();
 
@@ -254,7 +254,7 @@ const readGraphicsAccFiltered = () => {
     data.globalWhite = reader.ReadUInt32();
     data.globalGreen = reader.ReadUInt32();
     data.globalChequered = reader.ReadUInt32();
-    data.globalRed = reader.ReadUInt32()
+    data.globalRed = reader.ReadUInt32();
 
     data.mfdTyreSet = reader.ReadUInt32();
     data.mfdFuelToAdd = reader.ReadFloat();

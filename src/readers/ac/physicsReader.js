@@ -176,7 +176,7 @@ const readPhysicsAccFiltered = () => {
     readUtils.readArray(reader.ReadFloat(), 4);
     data.suspensionTravel = readUtils.readArray(reader, 'float', 4);
 
-    data.drs = reader.ReadFloat();
+    reader.ReadFloat();
     data.tc = reader.ReadFloat();
 
     data.heading = reader.ReadFloat();
@@ -187,7 +187,7 @@ const readPhysicsAccFiltered = () => {
 
     data.carDamage = readUtils.readArray(reader, 'float', 5);
 
-    data.numberOfTyresOut = reader.ReadUInt32();
+    reader.ReadUInt32();
 
     data.pitLimiterOn = reader.ReadUInt32();
     data.abs = reader.ReadFloat();
@@ -248,8 +248,8 @@ const readPhysicsAccFiltered = () => {
     data.slipRatio = readUtils.readArray(reader, 'float', 4);
     data.slipAngle = readUtils.readArray(reader, 'float', 4);
 
-    data.tcinAction = reader.ReadUInt32();
-    data.absInAction = reader.ReadUInt32();
+    reader.ReadUInt32();
+    reader.ReadUInt32();
 
     readUtils.readArray(reader, 'float', 4);
     readUtils.readArray(reader, 'float', 4);
