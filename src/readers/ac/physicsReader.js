@@ -157,52 +157,52 @@ const readPhysicsAccFiltered = () => {
     data.brake = reader.ReadFloat();
 
     data.fuel = reader.ReadFloat();
-    data.gear = reader.ReadUInt32();
+    data.gear = reader.ReadUInt32() - 1;
     data.rpm = reader.ReadUInt32();
 
     data.steerAngle = reader.ReadFloat();
     data.speedKmh = reader.ReadFloat();
 
     data.velocity = readUtils.readArray(reader, 'float', 3);
-    data.accG = readUtils.readArray(reader, 'int', 3);
+    data.accG = readUtils.readArray(reader, 'float', 3);
 
     data.wheelSlip = readUtils.readArray(reader, 'float', 4);
-    readUtils.readArray(reader.ReadFloat(), 4);
+    readUtils.readArray(reader, 'float', 4); //wheel load
     data.wheelPressure = readUtils.readArray(reader, 'float', 4);
     data.wheelAngularSpeed = readUtils.readArray(reader, 'float', 4);
-    readUtils.readArray(reader.ReadFloat(), 4);
-    readUtils.readArray(reader.ReadFloat(), 4);
+    readUtils.readArray(reader, 'float', 4); //tyreWear
+    readUtils.readArray(reader, 'float', 4); //tyre dirty
     data.tyreCoreTemp = readUtils.readArray(reader, 'float', 4);
-    readUtils.readArray(reader.ReadFloat(), 4);
+    readUtils.readArray(reader, 'float', 4); // camberRAD
     data.suspensionTravel = readUtils.readArray(reader, 'float', 4);
 
-    reader.ReadFloat();
+    reader.ReadFloat(); //drs
     data.tc = reader.ReadFloat();
 
     data.heading = reader.ReadFloat();
     data.pitch = reader.ReadFloat();
     data.roll = reader.ReadFloat();
 
-    reader.ReadFloat();
+    reader.ReadFloat(); //cgHeight
 
     data.carDamage = readUtils.readArray(reader, 'float', 5);
 
-    reader.ReadUInt32();
+    reader.ReadUInt32(); //number of tyre sets
 
-    data.pitLimiterOn = reader.ReadUInt32();
+    data.pitLimiterOn = reader.ReadUInt32() > 0;
     data.abs = reader.ReadFloat();
 
-    reader.ReadFloat();
-    reader.ReadFloat();
+    reader.ReadFloat(); //kers charge
+    reader.ReadFloat(); //kers input
 
-    data.autoshifterOn = reader.ReadUInt32();
+    data.autoshifterOn = reader.ReadUInt32() > 0;
 
-    readUtils.readArray(reader, 'float', 2);
+    readUtils.readArray(reader, 'float', 2); // rideHeight
 
     data.turboBoost = reader.ReadFloat();
 
-    reader.ReadFloat();
-    reader.ReadFloat();
+    reader.ReadFloat(); //ballast
+    reader.ReadFloat(); // air density
 
     data.airTemp = reader.ReadFloat();
     data.roadTemp = reader.ReadFloat();
@@ -210,7 +210,7 @@ const readPhysicsAccFiltered = () => {
     data.localAngularVel = readUtils.readArray(reader, 'float', 3);
     data.finalFF = reader.ReadFloat();
 
-    reader.ReadFloat();
+    reader.ReadFloat(); //drs and kers/ers stuff
     reader.ReadUInt32();
     reader.ReadUInt32();
     reader.ReadUInt32();
@@ -223,11 +223,11 @@ const readPhysicsAccFiltered = () => {
     data.brakeTemp = readUtils.readArray(reader, 'float', 4);
     data.clutch = reader.ReadFloat();
 
-    readUtils.readArray(reader, 'float', 4);
+    readUtils.readArray(reader, 'float', 4); //temp imo
     readUtils.readArray(reader, 'float', 4);
     readUtils.readArray(reader, 'float', 4);
 
-    data.isAIControlled = reader.ReadUInt32();
+    data.isAIControlled = reader.ReadUInt32() > 0;
 
     data.tyreContactPoint = readUtils.readMatrix(reader, 'float', 4, 3);
     data.tyreContactNormal = readUtils.readMatrix(reader, 'float', 4, 3);
@@ -236,23 +236,23 @@ const readPhysicsAccFiltered = () => {
     data.brakeBias = reader.ReadFloat();
     data.localVelocity = readUtils.readArray(reader, 'float', 3);
 
-    reader.ReadUInt32();
+    reader.ReadUInt32(); //push to pass
     reader.ReadUInt32();
 
-    reader.ReadFloat();
+    reader.ReadFloat(); //max rpm
 
-    readUtils.readArray(reader, 'float', 4);
+    readUtils.readArray(reader, 'float', 4); //mz, fx, fy
     readUtils.readArray(reader, 'float', 4);
     readUtils.readArray(reader, 'float', 4);
 
     data.slipRatio = readUtils.readArray(reader, 'float', 4);
     data.slipAngle = readUtils.readArray(reader, 'float', 4);
 
-    reader.ReadUInt32();
+    reader.ReadUInt32(); //tc and abs
     reader.ReadUInt32();
 
-    readUtils.readArray(reader, 'float', 4);
-    readUtils.readArray(reader, 'float', 4);
+    readUtils.readArray(reader, 'float', 4); //suspension damage
+    readUtils.readArray(reader, 'float', 4); //tyre temp
 
     data.waterTemp = reader.ReadFloat();
     data.brakePressure = readUtils.readArray(reader, 'float', 4);

@@ -156,7 +156,7 @@ const readGraphicsAccFiltered = () => {
     data.packetId = reader.ReadUInt32();
 
     data.acc_status = reader.ReadUInt32();
-    data.acc_session_type = reader.ReadUInt32();
+    data.acc_session_type = reader.ReadInt32();
 
     data.currentTime = readUtils.readWideString(reader, 15);
     data.lastTime = readUtils.readWideString(reader, 15);
@@ -172,14 +172,14 @@ const readGraphicsAccFiltered = () => {
     data.sessionTimeLeft = reader.ReadFloat();
     data.distanceTraveled = reader.ReadFloat();
 
-    data.isInPit = reader.ReadUInt32();
+    data.isInPit = reader.ReadUInt32() > 0;
     data.currentSectorIndex = reader.ReadUInt32();
     data.lastSectorTime = reader.ReadUInt32();
     data.numberOfLaps = reader.ReadUInt32();
 
     data.tyreCompund = readUtils.readWideString(reader, 34);
 
-    reader.ReadFloat();
+    reader.ReadFloat(); //replay time multiplier
 
     data.normalizedCarPosition = reader.ReadFloat();
 
@@ -193,18 +193,18 @@ const readGraphicsAccFiltered = () => {
     data.flag = reader.ReadUInt32();
     data.penalty = reader.ReadUInt32();
 
-    data.idealLineOn = reader.ReadUInt32();
+    data.idealLineOn = reader.ReadUInt32() > 0;
 
-    data.isInPitLane = reader.ReadUInt32();
+    data.isInPitLane = reader.ReadUInt32() > 0;
 
     data.surfaceGrip = reader.ReadFloat();
 
-    data.mandatoryPitDone = reader.ReadUInt32();
+    data.mandatoryPitDone = reader.ReadUInt32() > 0;
 
     data.windSpeed = reader.ReadFloat();
     data.windDirection = reader.ReadFloat();
 
-    data.isSetupMenuVisible = reader.ReadUInt32();
+    data.isSetupMenuVisible = reader.ReadUInt32() > 0;
 
     data.mainDisplayIndex = reader.ReadUInt32();
     data.secondaryDisplyIndex = reader.ReadUInt32();
@@ -213,48 +213,48 @@ const readGraphicsAccFiltered = () => {
     data.engineMap = reader.ReadUInt32();
     data.abs = reader.ReadUInt32();
     data.fuelXLap = reader.ReadFloat();
-    data.rainLights = reader.ReadUInt32();
-    data.flashingLights = reader.ReadUInt32();
+    data.rainLights = reader.ReadUInt32() > 0;
+    data.flashingLights = reader.ReadUInt32() > 0;
     data.lightsStage = reader.ReadUInt32();
     data.exhaustTemperature = reader.ReadFloat();
     data.wiperLV = reader.ReadUInt32();
 
-    data.driverStintTotalTimeLeft = reader.ReadUInt32();
-    data.driverStintTimeLeft = reader.ReadUInt32();
+    data.driverStintTotalTimeLeft = reader.ReadInt32();
+    data.driverStintTimeLeft = reader.ReadInt32();
 
-    data.rainTyres = reader.ReadUInt32();
+    data.rainTyres = reader.ReadUInt32() > 0;
 
     data.sessionIndex = reader.ReadUInt32();
 
     data.usedFuel = reader.ReadFloat();
 
-    data.deltaLapTime = readUtils.readWideString(reader, 15);
+    data.deltaLapTime = readUtils.readWideString(reader, 16);
     data.iDeltaLapTime = reader.ReadUInt32();
-    data.estimatedLapTime = readUtils.readWideString(reader, 15);
+    data.estimatedLapTime = readUtils.readWideString(reader, 16);
     data.iEstimatedLapTime = reader.ReadUInt32();
-    data.isDeltaPositive = reader.ReadUInt32();
+    data.isDeltaPositive = reader.ReadUInt32() > 0;
     data.iSplit = reader.ReadUInt32();
-    data.isValidLap = reader.ReadUInt32();
+    data.isValidLap = reader.ReadUInt32() > 0;
 
     data.fuelEstimatedLaps = reader.ReadFloat();
 
-    data.trackStatus = readUtils.readWideString(reader, 33);
+    data.trackStatus = readUtils.readWideString(reader, 34);
 
     data.missingMandatoryPits = reader.ReadUInt32();
 
     data.clock = reader.ReadFloat();
 
-    data.directionLightsLeft = reader.ReadUInt32();
-    data.directionLightsRight = reader.ReadUInt32();
+    data.directionLightsLeft = reader.ReadUInt32() > 0;
+    data.directionLightsRight = reader.ReadUInt32() > 0;
 
-    data.globalYellow = reader.ReadUInt32();
-    data.globalYellow1 = reader.ReadUInt32();
-    data.globalYellow2 = reader.ReadUInt32();
-    data.globalYellow3 = reader.ReadUInt32();
-    data.globalWhite = reader.ReadUInt32();
-    data.globalGreen = reader.ReadUInt32();
-    data.globalChequered = reader.ReadUInt32();
-    data.globalRed = reader.ReadUInt32();
+    data.globalYellow = reader.ReadUInt32() > 0;
+    data.globalYellow1 = reader.ReadUInt32() > 0;
+    data.globalYellow2 = reader.ReadUInt32() > 0;
+    data.globalYellow3 = reader.ReadUInt32() > 0;
+    data.globalWhite = reader.ReadUInt32() > 0;
+    data.globalGreen = reader.ReadUInt32() > 0;
+    data.globalChequered = reader.ReadUInt32() > 0;
+    data.globalRed = reader.ReadUInt32() > 0;
 
     data.mfdTyreSet = reader.ReadUInt32();
     data.mfdFuelToAdd = reader.ReadFloat();
