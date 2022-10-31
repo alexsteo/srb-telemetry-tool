@@ -1,32 +1,34 @@
-const {createServer} = require("http");
+const {readAll, readAllAccFiltered} = require("./readers/ac/reader");
+const {readGraphicsAccFiltered, readGraphics} = require("./readers/ac/graphicReader");
+const {filterAccData, filterAccDataForCSV} = require("./filterers/acc/accFilterer");
+const express = require('express');
+const app = express();
+const http = require('http');
+const server = http.createServer(app);
 const {Server} = require("socket.io");
-
-const httpServer = createServer();
-const io = new Server(httpServer, {
+const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3000",
-        allowedHeaders: ["my-custom-header"],
-        credentials: true
+        origin: '*'
     }
 });
 
 io.on("connection", (socket) => {
-    console.log("asdasd")
-    socket.on("app_start", () => {
-        setInterval(() => socket.emit("message", makeid(15)), 1000)
+    let interval;
+    console.log("connection");
+    socket.on("req_acc_data", () => {
+        console.log("requested data");
+    });
+    socket.on("req_acc_data", () => {
+        console.log("requested data");
+        interval = setInterval(() => {
+            console.log('sent')
+            socket.emit("send_acc_data", filterAccDataForCSV());
+        }, 15);
+    });
+    socket.on("stop_acc_data", () => {
+        console.log("stop request");
+        clearInterval(interval);
     })
 });
 
-httpServer.listen(3001);
-
-const makeid = (length) => {
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    for (let i = 0; i < length; i++ ) {
-        result += characters.charAt(Math.floor(Math.random() *
-            charactersLength));
-    }
-    console.log(result)
-    return result;
-}
+server.listen(3001);
