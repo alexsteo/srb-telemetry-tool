@@ -239,7 +239,6 @@ const filterAccDataForCSV = () => {
         padLife: data.physics.padLife,
         discLife: data.physics.discLife,
         suspensionTravel: data.physics.suspensionTravel,
-
     };
 }
 

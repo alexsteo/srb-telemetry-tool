@@ -5,7 +5,7 @@ try {
     require('electron-reloader')(module, {
         debug: true,
         watchRenderer: true,
-        ignore: 'telemetry.csv'
+        ignore: './telemetry'
     });
 } catch (_) { console.log('Error'); }
 

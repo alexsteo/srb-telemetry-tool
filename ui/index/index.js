@@ -1,12 +1,12 @@
 const start = () => {
-    test.start()
+    reader.startRead()
 }
 document.getElementById("start").onclick = start;
 
 const stop = () => {
-    test.stop()
-    document.getElementById("counts").innerText = "Counts: " + test.counts()
-    document.getElementById("time").innerText = "time: " + test.time()
+    reader.stopRead()
+    document.getElementById('counts').innerText = reader.getCounts()
+    document.getElementById('time').innerText = reader.getTotalTime()
 }
 document.getElementById("stop").onclick = stop;
 

@@ -1,41 +1,33 @@
-const {filterAccDataForCSV} = require("./filterers/acc/accFilterer");
-const fs = require("fs");
-const {csvHeader, objToCSVValues} = require("./util/csvUtil");
+const {Reader} = require("./reader");
+let reader;
 
-let interval;
-let counts = 0;
-let startTime;
-let totalTime;
+const startRead = () => {
+    reader = new Reader();
+    reader.initTelemetryFile();
+    reader.startRead();
+}
 
-const getTotalTime = () => {
-    return totalTime;
+const stopRead = () => {
+    if(!!reader) {
+        reader.stopRead();
+    }
 }
 
 const getCounts = () => {
-    return counts;
+    if(!!reader) {
+        return reader.getCounts();
+    }
 }
 
-const startListen = () => {
-    const telemetryFileName = 'telemetry.csv';
-    fs.writeFileSync(telemetryFileName, csvHeader + '\n');
-    counts = 0;
-    startTime = Date.now();
-    interval = setInterval(() => {
-        counts++;
-        const data = filterAccDataForCSV();
-        const csvData = objToCSVValues(data);
-        fs.writeFileSync(telemetryFileName, csvData, {flag: 'a'});
-    }, 10);
-}
-
-const stopListen = () => {
-    totalTime = Date.now() - startTime;
-    clearInterval(interval);
+const getTotalTime = () => {
+    if(!!reader) {
+        return reader.getTotalTime();
+    }
 }
 
 module.exports = {
-    startListen,
-    stopListen,
-    getTotalTime,
-    getCounts
+    startRead,
+    stopRead,
+    getCounts,
+    getTotalTime
 }
