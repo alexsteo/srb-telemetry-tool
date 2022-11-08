@@ -1,4 +1,4 @@
-const {Reader} = require("./reader");
+const {Reader} = require("./classes/reader");
 let reader;
 
 const startRead = () => {
@@ -25,9 +25,14 @@ const getTotalTime = () => {
     }
 }
 
+const openTelemetryFolder = () => {
+    require('child_process').exec('start "" ".\\telemetry"');
+}
+
 module.exports = {
     startRead,
     stopRead,
     getCounts,
-    getTotalTime
+    getTotalTime,
+    openTelemetryFolder
 }

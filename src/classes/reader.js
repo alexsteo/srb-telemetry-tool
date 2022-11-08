@@ -1,6 +1,6 @@
-const {csvHeader, objToCSVValues} = require("./util/csvUtil");
+const {csvHeader, objToCSVValues} = require("../util/csvUtil");
 const fs = require("fs");
-const {filterAccDataForCSV} = require("./filterers/acc/accFilterer");
+const {filterAccDataForCSV} = require("../filterers/acc/accFilterer");
 
 class Reader {
     constructor() {
